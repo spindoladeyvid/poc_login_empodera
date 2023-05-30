@@ -80,24 +80,6 @@ export const useAuthStore = defineStore("auth", {
         throw Error(error);
       }
     },
-
-    // async redirectDrupal(param: any) {
-    //   try {
-    //     return await authService
-    //       .redirectDrupal(param)
-    //       .then(async (response) => {
-    //         attachAuthHeaders(apiUrl, response.data.id_token);
-    //         this.token = response.data.id_token;
-    //         this.expire_token = response.data.expire;
-    //         return await this.updateStore();
-    //       })
-    //       .catch((err: any) => {
-    //         throw err;
-    //       });
-    //   } catch (error: any) {
-    //     throw Error(error);
-    //   }
-    // },
     async updateStore(data?: any) {
       if (data) {
         attachAuthHeaders(apiUrl, data.id_token);
@@ -111,9 +93,6 @@ export const useAuthStore = defineStore("auth", {
     async logout() {
       removeAuthHeaders(apiUrl);
       window.localStorage.clear();
-      this.isLoggedIn = false;
-      this.token = "";
-      this.expire_token = "";
       router.push({ name: "Login" });
     },
   },

@@ -20,16 +20,17 @@ export default defineComponent({
       this.store
         .getLinkGoogleLogin()
         .then((response) => {
-          const myWidth = 450;
-          const myHeight = 550;
+          window.location.href = response;
+          // const myWidth = 450;
+          // const myHeight = 550;
 
-          const left = (screen.width - myWidth) / 2;
-          const top = (screen.height - myHeight) / 4;
-          window.open(
-            response,
-            "Login with Google",
-            `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${myWidth}, height=${myHeight}, top=${top}, left=${left}`
-          );
+          // const left = (screen.width - myWidth) / 2;
+          // const top = (screen.height - myHeight) / 4;
+          // window.open(
+          //   response,
+          //   "Login with Google",
+          //   `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${myWidth}, height=${myHeight}, top=${top}, left=${left}`
+          // );
         })
         .catch((error) => {
           console.log(error);

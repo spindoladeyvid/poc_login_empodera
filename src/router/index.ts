@@ -17,7 +17,7 @@ const routes = [
     ],
   },
   {
-    path: "/admin",
+    path: "/admin/",
     component: () => import("@/layouts/admin/Default.vue"),
     meta: {
       requiresAuth: true,
@@ -31,6 +31,14 @@ const routes = [
             /* webpackChunkName: "dashboard" */ "@/views/admin/Dashboard.vue"
           ),
       },
+      {
+        path: "meus-dados",
+        name: "my_profile",
+        component: () =>
+          import(
+            /* webpackChunkName: "myProfile" */ "@/views/admin/MyProfile.vue"
+          ),
+      },
     ],
   },
 ];
@@ -41,12 +49,15 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const expiredToken = await authService.isExpiredToken();
-  if (expiredToken) {
-    await useAuthStore().refreshTokenGoogle();
-  }
+  const expiredToken = authService.isExpiredToken();
   const isAuthenticated = await authService.isAuthenticated();
-  if (to.meta.requiresAuth && isAuthenticated) {
+
+  if (expiredToken && isAuthenticated) {
+    console.log("Token expirado");
+    alert("Token expirado");
+    // await useAuthStore().refreshTokenGoogle();
+  }
+  if (to.meta.requiresAuth && !isAuthenticated) {
     next("");
   } else {
     next();

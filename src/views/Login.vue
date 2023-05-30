@@ -78,8 +78,8 @@ export default defineComponent({
         });
     },
     async redirectDrupal(param: any) {
-      this.store.loginGoogle(param).then((isLoggedIn: boolean) => {
-        if (isLoggedIn) {
+      this.store.loginGoogle(param).then(() => {
+        if (this.store.isLoggedIn) {
           this.$router.push({ name: "Dashboard" });
         }
       });

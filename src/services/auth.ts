@@ -25,12 +25,13 @@ const authService = {
     return apiUrl.post(`/login/token${payload}`);
   },
   // verifica se o token está expirado
-  async isExpiredToken() {
+  isExpiredToken() {
     const authStore = setupAuthStore();
     const expire_token =
-      (authStore.expire_token as unknown as number) > Date.now() / 1000
+      (authStore.expire_token as unknown as number) < Date.now() / 1000
         ? true
         : false;
+    console.log("expire_token", expire_token);
     return expire_token;
   },
   // atualiza o store com o novo token
@@ -40,7 +41,7 @@ const authService = {
   // valida o token e verifica se o usuário está logado
   async isAuthenticated() {
     const authStore = setupAuthStore();
-    if (!authStore.isLoggedIn && (await this.isExpiredToken())) {
+    if (!authStore.isLoggedIn && this.isExpiredToken()) {
       return false;
     } else if (authStore.isLoggedIn && !this.isExpiredToken()) {
       return true;
