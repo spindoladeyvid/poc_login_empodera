@@ -5,11 +5,19 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
+    path: "",
+    name: "LandPage",
+    component: () =>
+      import(
+        /* webpackChunkName: "landpage" */ "@/views/landpage/Landpage.vue"
+      ),
+  },
+  {
     path: "/",
     component: () => import("@/layouts/default/Default.vue"),
     children: [
       {
-        path: "",
+        path: "login",
         name: "Login",
         component: () =>
           import(/* webpackChunkName: "login" */ "@/views/Login.vue"),
@@ -53,12 +61,12 @@ router.beforeEach(async (to, from, next) => {
   const isAuthenticated = await authService.isAuthenticated();
 
   if (expiredToken && isAuthenticated) {
-    console.log("Token expirado");
     alert("Token expirado");
-    // await useAuthStore().refreshTokenGoogle();
+    const refreshToken = useAuthStore().refresh_token;
+    await useAuthStore().refreshTokenGoogle(refreshToken);
   }
   if (to.meta.requiresAuth && !isAuthenticated) {
-    next("");
+    next("/login"); //se não estiver logado, redireciona para a página de login
   } else {
     next();
   }

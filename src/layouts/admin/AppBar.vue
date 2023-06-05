@@ -34,23 +34,15 @@
       </v-menu>
     </template>
   </v-app-bar>
-
-  <v-navigation-drawer v-model="drawer" temporary>
-    <v-list density="compact" nav>
-      <v-list-item
-        prepend-icon="mdi-view-dashboard"
-        title="Home"
-        value="home"
-        :to="{ name: 'Dashboard' }"
-      />
-    </v-list>
-  </v-navigation-drawer>
+  <navegation-drawer v-model="drawer" />
 </template>
 
 <script lang="ts">
+import NavegationDrawer from "@/components/layouts/admin/NavegationDrawer.vue";
 import { useAuthStore } from "@/store/auth";
 import { defineComponent } from "vue";
 export default defineComponent({
+  components: { NavegationDrawer },
   data: () => ({
     drawer: null,
     user: {

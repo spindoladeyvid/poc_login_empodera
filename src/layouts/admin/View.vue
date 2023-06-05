@@ -1,10 +1,6 @@
 <template>
   <v-main>
-    <v-container class="fill-height">
-      <v-responsive class="d-flex fill-height">
-        <router-view />
-      </v-responsive>
-    </v-container>
+    <router-view />
   </v-main>
 </template>
 

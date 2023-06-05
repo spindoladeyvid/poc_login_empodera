@@ -2,34 +2,13 @@
   <v-item-group class="d-flex justify-space-between mt-4 px-6 pt-2 pb-6">
     <v-item> <google-login-button /> </v-item>
     <v-item>
-      <v-btn
-        icon="mdi mdi-facebook"
-        border
-        height="40"
-        variant="text"
-        width="40"
-        color="#3B5998"
-      />
+      <facebook-login-button />
     </v-item>
     <v-item>
-      <v-btn
-        icon="mdi mdi-twitter"
-        border
-        height="40"
-        variant="text"
-        width="40"
-        color="#00ACEE"
-      />
+      <twitter-login-button />
     </v-item>
     <v-item>
-      <v-btn
-        icon="mdi mdi-linkedin"
-        border
-        height="40"
-        variant="text"
-        width="40"
-        color="#0E76A8"
-      />
+      <linkedin-login-button />
     </v-item>
   </v-item-group>
 </template>
@@ -37,12 +16,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import GoogleLoginButton from "./GoogleLoginButton.vue";
+import TwitterLoginButton from "./TwitterLoginButton.vue";
+import FacebookLoginButton from "./FacebookLoginButton.vue";
+import LinkedinLoginButton from "./LinkedinLoginButton.vue";
 export default defineComponent({
   components: {
     GoogleLoginButton,
-    // FacebookLoginButton,
-    // TwitterLoginButton,
-    // LinkedinLoginButton,
+    TwitterLoginButton,
+    FacebookLoginButton,
+    LinkedinLoginButton,
   },
   setup() {
     return {};

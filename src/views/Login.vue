@@ -60,8 +60,9 @@ export default defineComponent({
   }),
   created() {
     const param = this.$route;
-    if (param.fullPath != "/") {
-      this.redirectDrupal(param.fullPath);
+    if (param.fullPath.includes("code")) {
+      const query = param.fullPath.split("login")[1];
+      this.redirectDrupal(query);
     }
   },
   methods: {

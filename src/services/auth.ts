@@ -11,6 +11,7 @@ const authService = {
         throw err;
       });
   },
+  // ## Google
   // retorna o link para o login com o Google no drupal
   async getLinkGoogleLogin() {
     return apiUrl
@@ -22,8 +23,13 @@ const authService = {
   },
   // retorna para o drupal e o drupal retorna para o front o token
   async loginGoogle(payload: any) {
-    return apiUrl.post(`/login/token${payload}`);
+    return apiUrl.post("/login/token/ecoe/", payload);
   },
+  // atualiza o store com o novo token
+  async refreshTokenGoogle(refresh_token: string) {
+    return apiUrl.post("/login/token/ecoe/refresh", refresh_token);
+  },
+
   // verifica se o token está expirado
   isExpiredToken() {
     const authStore = setupAuthStore();
@@ -33,10 +39,6 @@ const authService = {
         : false;
     console.log("expire_token", expire_token);
     return expire_token;
-  },
-  // atualiza o store com o novo token
-  async refreshTokenGoogle() {
-    return apiUrl.post("/login/refreshtoken");
   },
   // valida o token e verifica se o usuário está logado
   async isAuthenticated() {

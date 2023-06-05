@@ -7,11 +7,11 @@
         </v-col>
       </v-row>
       <v-row class="d-flex align-center justify-center">
-        <v-col cols="5">
+        <v-col class="v-col-xs-12 v-col-md-9 v-col-sm-9 v-col-lg-7 v-col-xl-6">
           <v-form>
-            <v-text-field label="Nome" variant="outlined" />
-            <v-text-field label="Email" variant="outlined" />
-            <v-text-field label="Senha" variant="outlined" />
+            <v-text-field label="Nome" name="name" variant="outlined" />
+            <v-text-field label="Email" name="email" variant="outlined" />
+            <v-text-field label="Senha" name="password" variant="outlined" />
             <v-btn
               type="submit"
               class="text-none"
