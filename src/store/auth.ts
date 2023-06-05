@@ -10,6 +10,7 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     isLoggedIn: false,
     token: "" as string,
+    refresh_token: "" as string,
     expire_token: "" as string,
     user: "" as unknown as IGetUsersData,
   }),
@@ -63,10 +64,10 @@ export const useAuthStore = defineStore("auth", {
         throw Error(error);
       }
     },
-    async refreshTokenGoogle() {
+    async refreshTokenGoogle(refresh_token: string) {
       try {
         return await authService
-          .refreshTokenGoogle()
+          .refreshTokenGoogle(refresh_token)
           .then(async (response) => {
             if (response.status === 200) {
               return await this.updateStore(response.data);
@@ -84,6 +85,7 @@ export const useAuthStore = defineStore("auth", {
       if (data) {
         attachAuthHeaders(apiUrl, data.id_token);
         this.token = data.id_token;
+        this.refresh_token = data.refresh_token;
         this.expire_token = data.expire;
         this.isLoggedIn = true;
         return true;
